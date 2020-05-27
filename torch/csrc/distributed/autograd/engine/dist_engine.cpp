@@ -279,7 +279,7 @@ void DistEngine::execute_graph_task_until_ready_queue_empty(
       if (task.fn_ && !local_graph_task->has_error_.load()) {
         AutoGradMode grad_mode(local_graph_task->grad_mode_);
         try {
-          GraphTaskGuard guard(graph_task);
+          GraphTaskGuard guard(local_graph_task);
           engine_.evaluate_function(
               local_graph_task, task.fn_.get(), task.inputs_, cpu_ready_queue);
         } catch (std::exception& e) {
